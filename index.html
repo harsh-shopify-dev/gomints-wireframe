@@ -107,8 +107,8 @@
   .hero .gallery-main img{display:block;width:100%;height:auto;border-radius:0;opacity:0;position:absolute;top:0;left:0;transition:opacity .35s ease}
   .hero .gallery-main img.active{opacity:1;position:relative}
   .hero .thumbs{display:flex;gap:10px;padding-left:24px}
-  .hero .thumbs button{flex:0 0 auto;width:72px;height:72px;border:2.5px solid var(--navy);border-radius:10px;overflow:hidden;cursor:pointer;padding:0;background:var(--sky);transition:opacity .2s,border-color .2s,box-shadow .2s,transform .2s;opacity:.65;box-shadow:3px 4px 0 0 var(--navy)}
-  .hero .thumbs button.active{border-color:var(--cyan);box-shadow:3px 4px 0 0 var(--cyan);opacity:1;transform:translateY(-2px)}
+  .hero .thumbs button{flex:0 0 auto;width:72px;height:72px;border:2px solid var(--navy);border-radius:10px;overflow:hidden;cursor:pointer;padding:0;background:var(--sky);transition:opacity .2s,border-color .2s,box-shadow .2s,transform .2s;opacity:.65;box-shadow:0 3px 8px rgba(8,42,69,.15)}
+  .hero .thumbs button.active{border-color:var(--cyan);box-shadow:0 3px 10px rgba(18,190,233,.35);opacity:1;transform:translateY(-2px)}
   .hero .thumbs button:hover{opacity:1}
   .hero .thumbs button img{width:100%;height:100%;object-fit:cover;display:block}
 
@@ -123,7 +123,7 @@
   @keyframes hero-blink{0%,100%{opacity:1}50%{opacity:0}}
   .hero .benefits{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin-bottom:26px}
   .hero .benefits li{display:flex;gap:12px;align-items:flex-start}
-  .hero .benefits .ico{flex:none;width:46px;height:46px;border-radius:50%;background:linear-gradient(160deg,var(--cyan) 0%,var(--volt) 100%);border:2.5px solid var(--navy);display:grid;place-items:center;margin-top:2px;box-shadow:0 3.5px 0 0 var(--navy),0 6px 10px rgba(8,42,69,.22)}
+  .hero .benefits .ico{flex:none;width:46px;height:46px;border-radius:50%;background:var(--cyan);border:2.5px solid var(--navy);display:grid;place-items:center;margin-top:2px;box-shadow:0 3.5px 0 0 var(--navy),0 6px 10px rgba(8,42,69,.22)}
   .hero .benefits .ico svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
   .hero .benefits .b-title{font-size:14px;font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:2px}
   .hero .benefits .b-desc{font-size:13px;font-weight:500;color:var(--grey);line-height:1.4}
@@ -173,8 +173,8 @@
   .hero .flav-opt.active .flav-circle{border-color:var(--cyan)}
   .hero .flav-circle img{width:70%;height:70%;object-fit:contain;margin:15%}
   .hero .flav-label{font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.02em}
-  .hero .tiers{display:flex;flex-direction:column;gap:0;margin-bottom:24px;border:2.5px solid var(--navy);border-radius:16px;overflow:hidden;box-shadow:5px 6px 0 0 var(--navy)}
-  .hero .tier{display:flex;align-items:center;padding:18px 20px;cursor:pointer;transition:background .15s;background:#fff;border-bottom:2px solid var(--navy)}
+  .hero .tiers{display:flex;flex-direction:column;gap:0;margin-bottom:24px;border:1.5px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 14px rgba(8,42,69,.08)}
+  .hero .tier{display:flex;align-items:center;padding:18px 20px;cursor:pointer;transition:background .15s;background:#fff;border-bottom:1px solid var(--line)}
   .hero .tier:last-child{border-bottom:none}
   .hero .tier:hover{background:var(--mist)}
   .hero .tier.active{background:linear-gradient(160deg,rgba(18,190,233,.18) 0%,rgba(233,239,18,.30) 100%);box-shadow:inset 5px 0 0 0 var(--cyan)}
