@@ -121,6 +121,7 @@
   .hero .rot .caret{color:var(--cyan);font-weight:700;margin-left:.02em;animation:hero-blink 1s step-end infinite}
   .hero .mint-tag{color:var(--cyan)}
   @keyframes hero-blink{0%,100%{opacity:1}50%{opacity:0}}
+  .hero .sub{font-size:1.13rem;line-height:1.5;color:var(--navy-2);font-weight:500;max-width:46ch;margin-bottom:24px}
   .hero .benefits{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin-bottom:26px}
   .hero .benefits li{display:flex;gap:12px;align-items:flex-start}
   .hero .benefits .ico{flex:none;width:46px;height:46px;border-radius:50%;background:var(--cyan);border:2.5px solid var(--navy);display:grid;place-items:center;margin-top:2px;box-shadow:0 3.5px 0 0 var(--navy),0 6px 10px rgba(8,42,69,.22)}
@@ -167,17 +168,20 @@
   /* hero — pack picker */
   .hero .pick-head{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:14px}
   .hero .flav-row{display:flex;gap:20px;margin-bottom:20px;flex-wrap:wrap}
-  .hero .flav-opt{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:transform .15s}
-  .hero .flav-opt:hover{transform:translateY(-2px)}
-  .hero .flav-circle{width:64px;height:64px;border-radius:50%;border:2.5px solid var(--navy);overflow:hidden;transition:border-color .2s,transform .15s;background:var(--sky)}
-  .hero .flav-opt.active .flav-circle{border-color:var(--cyan)}
+  .hero .flav-opt{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:transform .15s,opacity .15s;opacity:.55}
+  .hero .flav-opt:hover{transform:translateY(-2px);opacity:.85}
+  .hero .flav-opt.active{opacity:1}
+  .hero .flav-circle{width:64px;height:64px;border-radius:50%;border:2.5px solid var(--line);overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s;background:var(--sky)}
+  .hero .flav-opt.active .flav-circle{border:3px solid var(--cyan);box-shadow:0 0 0 4px rgba(18,190,233,.28);transform:scale(1.06)}
   .hero .flav-circle img{width:70%;height:70%;object-fit:contain;margin:15%}
-  .hero .flav-label{font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.02em}
+  .hero .flav-label{font-size:12px;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:.02em}
+  .hero .flav-opt.active .flav-label{color:var(--cyan-deep);font-weight:800}
+  .hero .flav-opt.active::after{content:'✓';position:absolute;top:-2px;left:50%;margin-left:14px;width:22px;height:22px;background:var(--cyan);color:#fff;border:2px solid #fff;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;box-shadow:0 2px 5px rgba(8,42,69,.3)}
   .hero .tiers{display:flex;flex-direction:column;gap:0;margin-bottom:24px;border:1.5px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 14px rgba(8,42,69,.08)}
   .hero .tier{display:flex;align-items:center;padding:18px 20px;cursor:pointer;transition:background .15s;background:#fff;border-bottom:1px solid var(--line)}
   .hero .tier:last-child{border-bottom:none}
   .hero .tier:hover{background:var(--mist)}
-  .hero .tier.active{background:linear-gradient(160deg,rgba(18,190,233,.18) 0%,rgba(233,239,18,.30) 100%);box-shadow:inset 5px 0 0 0 var(--cyan)}
+  .hero .tier.active{background:rgba(18,190,233,.14);box-shadow:inset 0 0 0 2.5px var(--cyan)}
   .hero .tier .radio{width:22px;height:22px;border-radius:50%;border:2.5px solid var(--line);margin-right:16px;flex:none;display:grid;place-items:center;transition:border-color .2s,background .2s}
   .hero .tier.active .radio{border-color:var(--cyan);background:var(--cyan)}
   .hero .tier.active .radio::after{content:'';width:10px;height:6px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px);border-radius:1px}
@@ -190,8 +194,21 @@
   .hero .tier .tier-was{font-size:13px;color:var(--grey);text-decoration:line-through;white-space:nowrap}
   .hero .tier .tier-now{font-size:14px;font-weight:800;color:var(--good);white-space:nowrap}
   .hero .offer-cta{margin-top:4px;padding-bottom:12px}
-  .hero .offer-cta .btn{width:100%;font-size:1.05rem;padding:18px 32px;text-align:center;border:2.5px solid var(--navy);box-shadow:0 6px 0 0 var(--navy)}
-  .hero .offer-cta .btn:hover{transform:translateY(2px);box-shadow:0 4px 0 0 var(--navy)}
+  .hero .offer-cta .btn{width:100%;font-size:1.05rem;padding:18px 32px;text-align:center;background:var(--cyan);border:2.5px solid var(--navy);box-shadow:none}
+  .hero .offer-cta .btn:hover{transform:none;box-shadow:none;background:var(--cyan-2)}
+
+  /* hero — guarantee reassurance (below Add to Cart) */
+  .hero .guarantee{display:flex;align-items:center;gap:16px;margin-top:16px;background:var(--mist);border:1.5px solid var(--line);border-radius:16px;padding:16px 18px}
+  .hero .g-seal{flex:none;width:66px;height:66px;color:var(--navy)}
+  .hero .g-seal svg{width:100%;height:100%;display:block;animation:g-spin 22s linear infinite}
+  @keyframes g-spin{to{transform:rotate(360deg)}}
+  .hero .g-seal svg .g-center{transform-origin:50px 50px;animation:g-spin 22s linear infinite reverse}
+  @media (prefers-reduced-motion:reduce){.hero .g-seal svg,.hero .g-seal svg .g-center{animation:none}}
+  .hero .g-title{font-size:15px;font-weight:800;text-transform:uppercase;color:var(--navy);letter-spacing:.02em;margin-bottom:4px}
+  .hero .g-desc{font-size:13px;color:var(--navy-2);line-height:1.45;font-weight:500;margin-bottom:7px}
+  .hero .g-link{font-size:12.5px;font-weight:800;color:var(--cyan-deep);text-decoration:none;border-bottom:2px solid var(--cyan);padding-bottom:1px}
+  .hero .g-link:hover{color:var(--navy);border-color:var(--navy)}
+  @media(max-width:460px){.hero .g-seal{width:56px;height:56px}.hero .guarantee{gap:12px;padding:14px 14px}}
 
   /* hero — rotating reviews (directly below Add to Cart) */
   .hero .reviews{position:relative;margin-top:16px;background:#fff;border:2px solid var(--navy);border-radius:16px;box-shadow:4px 5px 0 0 var(--navy);padding:16px 18px 18px;overflow:hidden}
@@ -214,91 +231,100 @@
   .hero .rv-dot.active{background:var(--cyan);transform:scale(1.25)}
 
   /* ============================================================
-     SECTION: COMPARE    (→ sections/compare.liquid)
-     "Why Go Mints" — us-vs-them comparison table inside 3D card
+     SECTION: FEELS   (→ sections/feels.liquid)
+     "The feeling" — Encha-inspired editorial card: image + intensity +
+     what-you'll-feel notes + energy-profile bars. NO shadows (client rule).
      ============================================================ */
-  .compare{background:var(--paper);padding:32px 0 80px}
-  .compare .comp-card{max-width:720px;margin:0 auto;border:3px solid var(--navy);border-radius:22px;box-shadow:7px 9px 0 0 var(--navy);background:#fff;overflow:hidden}
-  .compare .comp-head{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.08;padding:36px 32px 0;color:var(--navy);text-wrap:balance}
-  .compare .comp-head em{font-style:normal;color:var(--cyan)}
-  .compare .comp-table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
-  .compare .comp-table th,.compare .comp-table td{padding:15px 16px;text-align:center;border-bottom:1px solid var(--line);font-weight:600;color:var(--navy)}
-  .compare .comp-table th:first-child,.compare .comp-table td:first-child{text-align:left;font-weight:700}
-  .compare .comp-table thead th{padding:16px 16px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;background:#fff;border-bottom:2px solid var(--line)}
-  .compare .comp-table tbody tr:last-child td{border-bottom:none}
+  .feels{background:var(--paper);padding:44px 0 64px}
+  .feels .feels-head{text-align:center;font-size:clamp(1.9rem,4.4vw,3rem);text-transform:uppercase;color:var(--navy);line-height:1.05;margin-bottom:8px}
+  .feels .feels-head em{font-style:normal;color:var(--cyan)}
+  .feels .feels-sub{text-align:center;color:var(--grey);font-size:1.02rem;font-weight:600;margin-bottom:32px}
 
-  .compare .col-us{position:relative;border-left:3px solid var(--navy);border-right:3px solid var(--navy)}
-  .compare .comp-table thead th.col-us{background:linear-gradient(180deg,#B8F0D0 0%,#DCF8A0 100%);border-top:3px solid var(--navy);border-radius:14px 14px 0 0;box-shadow:3px 0 0 0 var(--navy),-3px 0 0 0 var(--navy)}
-  .compare .comp-table thead th.col-us .brand-logo{font-family:"Urbanist",sans-serif;font-weight:800;font-size:15px;letter-spacing:-.03em;color:var(--navy)}
-  .compare .comp-table td.col-us{background:linear-gradient(180deg,rgba(184,240,208,.3) 0%,rgba(220,248,160,.3) 100%)}
-  .compare .comp-table tbody tr:last-child td.col-us{border-bottom:3px solid var(--navy);border-radius:0 0 14px 14px}
+  .feels .feel-card{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:.82fr 1.18fr;background:#fff;border:2px solid var(--navy);border-radius:24px;overflow:hidden}
+  .feels .feel-img{background:var(--sky);display:grid;place-items:center;padding:28px}
+  .feels .feel-img img{width:100%;max-width:340px;height:auto;object-fit:contain;display:block}
+  .feels .feel-body{padding:26px 30px 28px;display:flex;flex-direction:column;justify-content:center}
+  .feels .feel-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:10px}
+  .feels .feel-title{font-size:clamp(1.4rem,2.5vw,1.9rem);text-transform:uppercase;color:var(--navy);line-height:1.05;font-weight:800}
+  .feels .feel-title b{color:var(--cyan)}
+  .feels .feel-seal{flex:none;width:64px;height:64px;color:var(--navy)}
+  .feels .feel-seal svg{width:100%;height:100%;display:block}
+  .feels .feel-desc{font-size:13.5px;color:var(--navy-2);line-height:1.55;font-weight:500;margin-bottom:16px;max-width:52ch}
+  .feels .feel-hr{height:1.5px;background:var(--line);margin:0 0 18px}
+  .feels .feel-cols{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
+  .feels .feel-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--navy);margin-bottom:10px}
 
-  .compare .ico-yes,.compare .ico-no{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-size:15px;font-weight:800}
-  .compare .ico-yes{background:var(--good);color:#fff}
-  .compare .ico-no{background:var(--navy);color:#fff}
+  .feels .intensity{display:flex;gap:6px;margin-bottom:18px}
+  .feels .intensity .bolt{width:23px;height:23px;color:var(--cyan)}
+  .feels .intensity .bolt.off{color:var(--line)}
+  .feels .intensity .bolt svg{width:100%;height:100%;fill:currentColor}
 
-  @media(max-width:920px){
-    .compare{padding:26px 0 56px}
+  .feels .notes{display:grid;grid-template-columns:1fr 1fr;gap:11px 16px}
+  .feels .note{display:flex;align-items:center;gap:9px;font-size:12.5px;font-weight:700;color:var(--navy-2);line-height:1.15}
+  .feels .note .n-ico{flex:none;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--navy);display:grid;place-items:center}
+  .feels .note .n-ico svg{width:15px;height:15px;stroke:var(--navy);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+  .feels .profile-bars{display:flex;align-items:flex-end;gap:9px;height:118px}
+  .feels .pb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .feels .pb-num{font-size:11px;font-weight:800;color:var(--navy);margin-bottom:3px}
+  .feels .pb-bar{width:100%;border-radius:5px 5px 0 0;background:linear-gradient(180deg,var(--cyan),rgba(18,190,233,.16))}
+  .feels .profile-caps{display:flex;gap:9px;margin-top:7px}
+  .feels .profile-caps span{flex:1;text-align:center;font-size:9.5px;font-weight:600;color:var(--grey);line-height:1.15}
+
+  @media(max-width:820px){
+    .feels .feel-card{grid-template-columns:1fr}
+    .feels .feel-img{padding:24px 24px 6px}
+    .feels .feel-img img{max-width:260px}
   }
-  @media(max-width:460px){
-    .compare{padding:20px 0 44px}
-    .compare .comp-card{border-radius:16px;box-shadow:5px 7px 0 0 var(--navy)}
-    .compare .comp-head{font-size:1.5rem;padding:24px 20px 0}
-    .compare .comp-table th,.compare .comp-table td{padding:11px 8px;font-size:11.5px}
-    .compare .ico-yes,.compare .ico-no{width:22px;height:22px;font-size:12px}
-    .compare .comp-table thead th.col-us .brand-logo{font-size:12px}
+  @media(max-width:560px){
+    .feels .feel-body{padding:26px 22px 30px}
+    .feels .feel-cols{grid-template-columns:1fr;gap:26px}
+    .feels .feel-seal{width:58px;height:58px}
+    .feels .profile-bars{height:150px}
   }
 
   /* ============================================================
      SECTION: FLOWSTATE   (→ sections/flowstate.liquid)
-     "Unlock your flow state" — before / after-4-weeks grouped bar chart
-     on a bold cyan band. Left: headline + blurb + CTA. Right: chart (scroll-animated).
+     "Unlock your flow state" — the energy/focus curve over a session:
+     Go Mints holds the flow zone; coffee & energy drinks spike to jitters
+     then crash. Original take on the flow-curve idea. No shadows.
      ============================================================ */
-  .flowstate{background:var(--grad-brand);color:var(--navy);padding:56px 0}
-  .flowstate .fs-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:44px;align-items:center}
-  .flowstate .t-title{font-size:clamp(2rem,4.6vw,3.4rem);font-weight:800;line-height:1.02;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:18px}
-  .flowstate .t-desc{font-size:1.02rem;line-height:1.55;color:var(--navy-2);max-width:42ch;margin-bottom:24px;font-weight:500}
-  .flowstate .t-cta{display:inline-block;background:var(--paper);color:var(--navy);border:2.5px solid var(--navy);border-radius:100px;padding:14px 26px;font-weight:800;font-size:.9rem;text-transform:uppercase;letter-spacing:.03em;text-decoration:none;box-shadow:0 5px 0 0 var(--navy);transition:transform .12s,box-shadow .12s}
-  .flowstate .t-cta:hover{transform:translateY(2px);box-shadow:0 3px 0 0 var(--navy)}
+  .flowstate{background:#F4FAFD;color:var(--navy);padding:46px 0 54px;overflow:hidden}
+  .flowstate .fs-head{text-align:center;font-size:clamp(1.35rem,4.6vw,2rem);text-transform:uppercase;line-height:1.05;margin-bottom:6px}
+  .flowstate .fs-head em{font-style:normal;color:var(--cyan)}
+  .flowstate .fs-sub{text-align:center;max-width:430px;margin:0 auto 12px;font-size:.82rem;color:var(--grey);line-height:1.45;font-weight:500}
+  .flowstate .fs-legend{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-bottom:4px}
+  .flowstate .fs-legend span{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--navy-2)}
+  .flowstate .fs-legend i{width:20px;height:5px;background:var(--cyan);border-radius:2px}
+  .flowstate .fs-legend i.dash{height:0;background:none;border-top:3px dashed rgba(8,42,69,.55)}
+  .flowstate .fs-chart{max-width:600px;margin:0 auto}
+  .flowstate .fs-chart svg{width:100%;height:auto;display:block;overflow:visible}
 
-  .flowstate .t-legend{display:flex;gap:8px;justify-content:flex-end;margin-bottom:18px;flex-wrap:wrap}
-  .flowstate .t-legend span{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;border:2px solid var(--navy);border-radius:100px;padding:6px 14px}
-  .flowstate .t-legend .lg-before{background:var(--paper)}
-  .flowstate .t-legend .lg-after{background:#7BDC3E}
-  .flowstate .chart{display:flex;gap:10px}
-  .flowstate .ylabel{writing-mode:vertical-rl;transform:rotate(180deg);align-self:center;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
-  .flowstate .plot-col{flex:1;min-width:0}
-  .flowstate .plot{position:relative;height:300px;padding-left:34px}
-  .flowstate .grid{position:absolute;inset:0 0 0 34px;display:flex;flex-direction:column;justify-content:space-between}
-  .flowstate .grid-row{position:relative;border-top:2px solid var(--navy)}
-  .flowstate .grid-row span{position:absolute;left:-34px;top:-8px;width:30px;text-align:right;font-size:11px;font-weight:700}
-  .flowstate .groups{position:absolute;inset:0 0 0 34px;display:flex;align-items:flex-end}
-  .flowstate .grp{flex:1;display:flex;justify-content:center;align-items:flex-end;height:100%}
-  .flowstate .pair{display:flex;align-items:flex-end;gap:8px;height:100%}
-  .flowstate .bar{width:34px;height:0;border:2px solid var(--navy);border-bottom:none;transition:height 1s cubic-bezier(.22,1,.36,1);transition-delay:var(--d,0s)}
-  .flowstate.in .bar{height:var(--h)}
-  .flowstate .bar.before{background:var(--paper)}
-  .flowstate .bar.after{background:#7BDC3E}
-  .flowstate .cats{display:flex;padding-left:34px;margin-top:9px}
-  .flowstate .cat{flex:1;text-align:center;font-size:11px;font-weight:800;text-transform:uppercase}
+  .flowstate .fc-line{fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .flowstate .fc-gomints{stroke:var(--cyan);stroke-width:9;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.9s ease}
+  .flowstate.in .fc-gomints{stroke-dashoffset:0}
+  .flowstate .fc-others{stroke:rgba(8,42,69,.62);stroke-width:5;stroke-dasharray:10 11;opacity:0;transition:opacity .9s ease .7s}
+  .flowstate.in .fc-others{opacity:1}
+  .flowstate .fc-thresh{stroke:rgba(18,190,233,.5);stroke-width:3}
+  .flowstate .fc-zone{fill:var(--grey);font-size:32px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+  .flowstate .fc-zone.flow{fill:var(--cyan)}
+  .flowstate .fc-tag{font-size:32px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+  .flowstate .fc-tag.gm{fill:var(--cyan)}
+  .flowstate .fc-dot{opacity:0;transition:opacity .5s ease 1.5s}
+  .flowstate.in .fc-dot{opacity:1}
+  .flowstate .fc-dot.gm{fill:var(--cyan)}
+  .flowstate .fc-dot.ot{fill:var(--navy)}
+  .flowstate .fc-ring{fill:none;stroke:var(--cyan);stroke-width:3.5;opacity:0;transition:opacity .5s ease 1.6s}
+  .flowstate.in .fc-ring{opacity:1}
+  .flowstate .fc-time{fill:var(--grey);font-size:22px;font-weight:600;letter-spacing:.05em}
 
-  @media (prefers-reduced-motion:reduce){.flowstate .bar{transition:none}}
-  @media(max-width:820px){
-    .flowstate{padding:40px 0}
-    .flowstate .fs-grid{grid-template-columns:1fr;gap:28px}
-    .flowstate .t-legend{justify-content:flex-start}
+  @media (prefers-reduced-motion:reduce){
+    .flowstate .fc-gomints{transition:none;stroke-dashoffset:0}
+    .flowstate .fc-others,.flowstate .fc-dot{transition:none;opacity:1}
   }
+  @media(max-width:820px){ .flowstate{padding:38px 0 42px} }
   @media(max-width:460px){
-    .flowstate{padding:30px 0}
-    .flowstate .t-title{font-size:1.7rem;margin-bottom:14px}
-    .flowstate .t-desc{font-size:.95rem;margin-bottom:20px}
-    .flowstate .plot{height:220px;padding-left:28px}
-    .flowstate .grid{inset:0 0 0 28px}.flowstate .groups{inset:0 0 0 28px}.flowstate .cats{padding-left:28px}
-    .flowstate .grid-row span{left:-28px;width:24px;font-size:10px}
-    .flowstate .bar{width:22px}
-    .flowstate .pair{gap:5px}
-    .flowstate .cat{font-size:9.5px}
-    .flowstate .ylabel{font-size:9px}
+    .flowstate{padding:32px 0 36px}
   }
 
   /* ============================================================
@@ -615,6 +641,8 @@
           <span class="mint-tag">in a mint.</span>
         </h1>
 
+        <p class="sub">Coffee's whole kick in a mint — melts in seconds, hits in four minutes flat. No jitters, no crash.</p>
+
         <!-- block: benefit grid (repeatable → blocks) -->
         <ul class="benefits">
           <li>
@@ -667,6 +695,28 @@
 
         <div class="offer-cta">
           <a href="#" class="btn cyan" id="offer-btn">Add to Cart · ₹499</a>
+        </div>
+
+        <!-- guarantee reassurance -->
+        <div class="guarantee">
+          <span class="g-seal">
+            <svg viewBox="0 0 100 100" role="img" aria-label="14-day money-back guarantee">
+              <defs><path id="gseal-path" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs>
+              <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="1"/>
+              <text font-size="9.5" font-weight="800" fill="currentColor" letter-spacing="1.2">
+                <textPath href="#gseal-path" startOffset="1%">MONEY-BACK · GUARANTEE · 14 DAYS · </textPath>
+              </text>
+              <g class="g-center">
+                <path d="M50 34 l12 4 v9.5 c0 8 -5 12.5 -12 15.5 c-7 -3 -12 -7.5 -12 -15.5 v-9.5 z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+                <path d="M44.5 48 l4 4 l7.5 -8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+          </span>
+          <div class="g-body">
+            <div class="g-title">Love it or it's free</div>
+            <p class="g-desc">Give it two weeks. Don't feel the difference? Message us and we'll refund your first order — keep what's left.</p>
+          </div>
         </div>
 
         <!-- block: rotating reviews (repeatable → blocks) -->
@@ -803,123 +853,111 @@
 </section>
 <!-- /SECTION: HERO -->
 
-<!-- ========================= SECTION: COMPARE ========================= -->
-<section class="compare" id="compare" data-section="compare">
+<!-- ========================= SECTION: FEELS ========================= -->
+<section class="feels" id="feels" data-section="feels">
   <div class="wrap">
-    <div class="comp-card">
+    <h2 class="feels-head">Less coffee.<br><em>More adrenaline.</em></h2>
+    <p class="feels-sub">Skip the spec sheet — here's what a Go Mint actually feels like.</p>
 
-      <h2 class="comp-head">Quit the 3 PM crash<br><em>without the trade-offs.</em></h2>
-
-      <table class="comp-table">
-        <thead>
-          <tr>
-            <th>Features</th>
-            <th class="col-us"><span class="brand-logo">Go Mints</span></th>
-            <th>Coffee</th>
-            <th>Energy Drinks</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Zero Jitters</td>
-            <td class="col-us"><span class="ico-yes">&#10003;</span></td>
-            <td><span class="ico-no">&#10005;</span></td>
-            <td><span class="ico-no">&#10005;</span></td>
-          </tr>
-          <tr>
-            <td>Kicks In Under 4 Min</td>
-            <td class="col-us"><span class="ico-yes">&#10003;</span></td>
-            <td><span class="ico-no">&#10005;</span></td>
-            <td><span class="ico-no">&#10005;</span></td>
-          </tr>
-          <tr>
-            <td>No Sugar Crash</td>
-            <td class="col-us"><span class="ico-yes">&#10003;</span></td>
-            <td><span class="ico-no">&#10005;</span></td>
-            <td><span class="ico-no">&#10005;</span></td>
-          </tr>
-          <tr>
-            <td>Fits In Your Pocket</td>
-            <td class="col-us"><span class="ico-yes">&#10003;</span></td>
-            <td><span class="ico-no">&#10005;</span></td>
-            <td><span class="ico-no">&#10005;</span></td>
-          </tr>
-          <tr>
-            <td>No Calories</td>
-            <td class="col-us"><span class="ico-yes">&#10003;</span></td>
-            <td><span class="ico-yes">&#10003;</span></td>
-            <td><span class="ico-no">&#10005;</span></td>
-          </tr>
-          <tr>
-            <td>Clean Energy + Focus</td>
-            <td class="col-us"><span class="ico-yes">&#10003;</span></td>
-            <td><span class="ico-no">&#10005;</span></td>
-            <td><span class="ico-no">&#10005;</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-    </div>
-  </div>
-</section>
-<!-- /SECTION: COMPARE -->
-
-<!-- ========================= SECTION: FLOWSTATE ========================= -->
-<section class="flowstate" id="flowstate" data-section="flowstate">
-  <div class="wrap">
-    <div class="fs-grid">
-
-      <!-- left: headline + blurb + CTA -->
-      <div class="t-copy">
-        <h2 class="t-title">Unlock your<br>flow state</h2>
-        <p class="t-desc">Pop one the moment you feel the dip. Let it melt, get back to work — and within minutes the stuff that wrecks your afternoons eases right off. The 3 p.m. crash, the coffee jitters, the low-grade stress. Not in four weeks — in about four minutes. Every single day.</p>
-        <a href="#" class="t-cta">See the difference</a>
+    <div class="feel-card">
+      <div class="feel-img">
+        <img src="sec.png" alt="Go Mints Energy + Focus pack" loading="lazy">
       </div>
 
-      <!-- right: before/after chart (block: bar pairs repeatable) -->
-      <div class="t-chart-wrap">
-        <div class="t-legend">
-          <span class="lg-before">Before a mint</span>
-          <span class="lg-after">Minutes later</span>
+      <div class="feel-body">
+        <div class="feel-top">
+          <h3 class="feel-title">Energy + Focus,<br><b>packed in a mint</b></h3>
+          <span class="feel-seal">
+            <svg viewBox="0 0 100 100" role="img" aria-label="Clean energy, no crash">
+              <defs><path id="feelseal" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs>
+              <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="1"/>
+              <text font-size="9.5" font-weight="800" fill="currentColor" letter-spacing="1.4"><textPath href="#feelseal" startOffset="1%">CLEAN ENERGY · NO CRASH · </textPath></text>
+              <path d="M54 32 L41 53 h8 l-3 15 13 -21 h-8 l3 -13z" fill="currentColor"/>
+            </svg>
+          </span>
         </div>
-        <div class="chart">
-          <span class="ylabel">Level of discomfort</span>
-          <div class="plot-col">
-            <div class="plot">
-              <div class="grid">
-                <div class="grid-row"><span>3.0</span></div>
-                <div class="grid-row"><span>2.0</span></div>
-                <div class="grid-row"><span>1.0</span></div>
-                <div class="grid-row"><span>0.0</span></div>
-              </div>
-              <div class="groups">
-                <div class="grp"><div class="pair">
-                  <div class="bar before" style="--h:96.7%;--d:.10s"></div>
-                  <div class="bar after"  style="--h:53.3%;--d:.16s"></div>
-                </div></div>
-                <div class="grp"><div class="pair">
-                  <div class="bar before" style="--h:85%;--d:.22s"></div>
-                  <div class="bar after"  style="--h:45%;--d:.28s"></div>
-                </div></div>
-                <div class="grp"><div class="pair">
-                  <div class="bar before" style="--h:78.3%;--d:.34s"></div>
-                  <div class="bar after"  style="--h:38.3%;--d:.40s"></div>
-                </div></div>
-              </div>
+
+        <p class="feel-desc">Natural caffeine, L-theanine and B-vitamins in one pocket mint. Melts in seconds, hits in about four minutes — clean lift, zero crash.</p>
+
+        <div class="feel-hr"></div>
+
+        <div class="feel-cols">
+          <div class="feel-meta">
+            <div class="feel-label">Intensity</div>
+            <div class="intensity">
+              <span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+              <span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+              <span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+              <span class="bolt"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+              <span class="bolt off"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
             </div>
-            <div class="cats">
-              <span class="cat">Crash</span>
-              <span class="cat">Jitters</span>
-              <span class="cat">Stress</span>
+
+            <div class="feel-label">Energy profile</div>
+            <div class="profile-bars">
+              <div class="pb"><span class="pb-num">95</span><div class="pb-bar" style="height:95px"></div></div>
+              <div class="pb"><span class="pb-num">90</span><div class="pb-bar" style="height:90px"></div></div>
+              <div class="pb"><span class="pb-num">85</span><div class="pb-bar" style="height:85px"></div></div>
+              <div class="pb"><span class="pb-num">88</span><div class="pb-bar" style="height:88px"></div></div>
+              <div class="pb"><span class="pb-num">92</span><div class="pb-bar" style="height:92px"></div></div>
+            </div>
+            <div class="profile-caps">
+              <span>Kick-in</span><span>Focus</span><span>Clean</span><span>Smooth</span><span>Lasting</span>
+            </div>
+          </div>
+
+          <div class="feel-notes">
+            <div class="feel-label">What you'll feel</div>
+            <div class="notes">
+              <div class="note"><span class="n-ico"><svg viewBox="0 0 24 24"><path d="M3 6v7a4 4 0 0 0 8 0 4 4 0 0 1 8 0"/><circle cx="3" cy="6" r="1"/></svg></span> Rollercoaster kick</div>
+              <div class="note"><span class="n-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5"/></svg></span> Laser focus</div>
+              <div class="note"><span class="n-ico"><svg viewBox="0 0 24 24"><path d="M12 3c1.7 2.2 2.6 3.5 2.6 4.8a2.6 2.6 0 0 1-5.2 0C9.4 6.5 10.3 5.2 12 3z"/><path d="M4 16c1.5-1.5 3-1.5 4.5 0s3 1.5 4.5 0 3-1.5 4.5 0"/></svg></span> Cold-plunge clarity</div>
+              <div class="note"><span class="n-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span> Hours of runway</div>
+              <div class="note"><span class="n-ico"><svg viewBox="0 0 24 24"><path d="M20 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 12h6"/></svg></span> Pocket-sized</div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+<!-- /SECTION: FEELS -->
 
+<!-- ========================= SECTION: FLOWSTATE ========================= -->
+<section class="flowstate" id="flowstate" data-section="flowstate">
+  <div class="wrap">
+    <h2 class="fs-head">Unlock your <em>flow state</em></h2>
+    <p class="fs-sub">That locked-in zone where focus comes easy and the hours fly. Go Mints gets you there and holds it — while coffee and energy drinks spike you into the jitters, then drop you into the crash.</p>
+
+    <div class="fs-legend">
+      <span><i></i> Go Mints</span>
+      <span><i class="dash"></i> Coffee &amp; energy drinks</span>
+    </div>
+
+    <div class="fs-chart">
+      <svg viewBox="0 60 620 560" role="img" aria-label="Energy and focus over a session — Go Mints stays in the flow zone while coffee and energy drinks spike to jitters then crash">
+        <!-- flow-zone boundary lines -->
+        <line class="fc-thresh" x1="16" y1="280" x2="604" y2="280"/>
+        <line class="fc-thresh" x1="16" y1="440" x2="604" y2="440"/>
+        <!-- zone labels -->
+        <text class="fc-zone" x="215" y="112" text-anchor="middle">Jitters</text>
+        <text class="fc-zone flow" x="90" y="322" text-anchor="start">Flow zone</text>
+        <text class="fc-zone" x="380" y="560" text-anchor="middle">Crash</text>
+        <!-- coffee / energy drinks: spike then crash -->
+        <path class="fc-line fc-others" d="M16,432 C80,398 130,150 215,142 C305,134 350,320 418,438 C500,560 560,596 585,602"/>
+        <!-- go mints: a confident, steady wave low in the flow zone -->
+        <path class="fc-line fc-gomints" pathLength="1" d="M16,410 C95,382 180,378 260,392 C340,406 400,404 475,386 C548,366 582,360 596,362"/>
+        <!-- endpoint dots -->
+        <circle class="fc-dot ot" cx="585" cy="602" r="9"/>
+        <circle class="fc-ring" cx="596" cy="362" r="19"/>
+        <circle class="fc-dot gm" cx="596" cy="362" r="12"/>
+        <!-- go mints endpoint tag -->
+        <text class="fc-tag gm" x="584" y="322" text-anchor="end">Go Mints</text>
+      </svg>
     </div>
   </div>
 
-  <!-- SECTION JS: reveal bars on scroll (→ moves inside sections/flowstate.liquid) -->
+  <!-- SECTION JS: draw the curve on scroll -->
   <script>
   (function(){
     var el=document.querySelector('.flowstate');

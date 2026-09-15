@@ -8,15 +8,23 @@ _Clear Growth · v1 · single source of truth for the GoMints PDP rebuild_
 This is the single source of truth. A new Claude Code session with **no prior memory** should be able to continue from here alone.
 
 - **Project folder:** `D:\CODE CONTAINERR\WEB DEV\GOMINT` (open Claude Code here — local session, full read/write).
-- **The wireframe file:** `gomintshero.html` — the growing PDP wireframe. **5 sections built so far**, in this DOM order: **Hero → Compare → Flow-state → Ingredients → Melt/power-up.** Open it in a browser to preview.
-- **What's left:** the guarantee ribbon (§4 #2) + sections 6→12 (§4), then the Shopify Liquid conversion. See **§7** for the live TODO.
-- **Assets in the folder:** `hero img.png` (3-pack banner, hero); `coffee icon.png` / `peppermint.png` (flavour circles); `powerup-sprite.png` (AI source sheet) + `powerup-0…5.webp` (the 6 power-up frames) + `powerup.gif` (client-share clip); `tools/process_sprite.py` (the sprite processor). Plus saved competitor pages (Hack Focus, Proper Wild, Sprinkle, Encha, Melo, Instant Hydration's `Energy+ Electrolyte Drink Mix.html`) for reference.
+- **The wireframe file:** **`index.html`** (was `gomintshero.html` — renamed for the Netlify deploy; a copy lives in `netlify-deploy/`). **The full PDP is now built.** Open in a browser to preview.
+- **Current DOM order:** Header → **Hero → Feels (adrenaline card) → Flow-state (curve) → Melt (power-up) → Reviews → Leave-out → Showcase → Ingredients → FAQ → Footer-CTA → Footer.**
+- **What's left:** polish per client feedback, a **site-wide no-shadow pass**, swap placeholder data/images for real, then the **Shopify Liquid conversion**. See **§7** for the live TODO.
+- **Assets in the folder:** `hero img.png` + `3.png`/`4.png` (hero gallery); `sec.png` (feels/showcase pack); `coffee icon.png` / `peppermint.png` (flavour circles); `powerup-sprite.png` + `powerup-0..5.webp` + `powerup.gif` (power-up sprite); `tools/process_sprite.py` (sprite processor). Plus saved competitor pages (Hack Focus, Proper Wild, Sprinkle, Encha, Everyday Dose, Melo, Instant Hydration) for reference.
 
 **First message to paste in the new session:**
-> _"Read GOMINTSBUILDGUIDE.md. gomintshero.html already has Hero, Compare, Flow-state, Ingredients and the Melt/power-up sections built. Continue from §7's TODO — build the remaining sections in order, following the design system (§2), the build conventions (§8), the daily-ritual voice (§6), and matching the as-built sections (§5–§5d)."_
+> _"Read GOMINTSBUILDGUIDE.md. The full PDP wireframe is built in index.html. Continue from §7's TODO. Follow the design system (§2 — note the NO-SHADOWS rule), build conventions (§8), the daily-ritual MojoVibe voice (§6), and match the as-built sections (§5–§5f). We're in a client-revision loop — expect targeted change requests."_
 
 ### The plan in one line
-Build the **full multi-section wireframe** in `gomintshero.html` first (hardcoded placeholder copy is fine), **then** convert the whole thing to **Shopify Liquid sections**. The file is already structured so that conversion is clean — see **§8**.
+The full multi-section wireframe is built in `index.html` (hardcoded placeholder copy). We're now **iterating on client revisions**; after that, convert to **Shopify Liquid sections** (§8) — the file is structured so conversion is clean.
+
+### ⚠️ Client feedback log (most recent first)
+- **NO SHADOWS anywhere** (new global rule). Newest sections (Feels, Flow-state) are shadow-free; the rest still use the old 3D hard-shadow style → a **site-wide removal pass is pending**.
+- **Comparison table REJECTED** → replaced by the **"Feels" adrenaline card** (§5a) — quirky high-adrenaline analogies, not a spec chart.
+- **Before/after bar graph REJECTED** → replaced by the **flow-state curve** (§5b), Hack-Daily-style (light, editorial), original artwork.
+- **Add to Cart:** flat solid cyan — **no gradient, no shadow**.
+- **Offer/tier selection:** the selected variant must be unmistakable (checkmark badge + cyan ring + outline).
 
 ---
 
@@ -65,7 +73,9 @@ Build the **full multi-section wireframe** in `gomintshero.html` first (hardcode
 ```
 `--grad-section` was the original default soft-section background.
 
-> **⚠️ Direction change (2026-09-10):** the client wants **clean plain-white section backgrounds**, not the Sprinkle gradient. The hero background was switched to `var(--paper)` (#FFFFFF) and its neon glow removed. **Default new sections to white** unless a section specifically calls for a gradient/dark band (e.g. the "mechanism" or an electric CTA band may still use `--grad-electric`). The gradient tokens stay available but are no longer the default.
+> **⚠️ Direction change (2026-09-10):** the client wants **clean plain-white section backgrounds**, not the Sprinkle gradient. The hero background was switched to `var(--paper)` (#FFFFFF) and its neon glow removed. **Default new sections to white** unless a section specifically calls for a gradient/dark band. The gradient tokens stay available but are no longer the default.
+
+> **⚠️ NO SHADOWS (client rule, 2026-09-15):** do **not** use `box-shadow` / drop-shadows on new or edited elements — no 3D hard-shadow buttons, no card lift shadows. Use **borders + hairline dividers** for structure instead (see the Feels §5a and Flow-state §5b sections, which are built shadow-free). The **older sections still contain the 3D `box-shadow:Xpx Ypx 0 0 var(--navy)` style** (hero cards, compare, ingredients, reviews, etc.) — a **site-wide shadow-removal pass is still pending** (§7). The buttons in §2 below are the OLD 3D style; the Add-to-Cart is already flattened (solid cyan, no gradient, no shadow).
 
 ### Typography — LOCKED
 - **Everything = Urbanist** (headings + body). Switched from Montserrat to Urbanist for a more attractive, energetic feel per client feedback.
@@ -100,84 +110,86 @@ _(Analysed from real saved pages: Hack Focus, Proper Wild, Sprinkle, Encha, Melo
 
 ---
 
-## 4. Section build order (the master map)
-Build **section by section**, finishing each before the next.
+## 4. Section map — CURRENT STATE
+The full PDP is built. This is what's live in `index.html`, in DOM order:
 
-1. **Hero** ✅ (done — see §5)
-2. **Guarantee ribbon** — 14-day no-jitters promise (moved HIGH)
-3. **Reframe vs the old habit + comparison** ✅ (done — see §5a)
-4. **Flow-state / before-after** ✅ (done — see §5b) — "before a mint" vs "minutes later" bar chart (Crash/Jitters/Stress drop, instant).
-   - **+ Melt / "Feel it switch on"** ✅ (done — see §5d) — the format-mechanism section: a pixel-art character **power-up flipbook** (eats mint → charges up). Currently placed after Ingredients in the DOM; reorder freely.
-5. **Ingredient CAST** ✅ (done — see §5c) — "What's inside" 4-card row; doses as multiples + sensory lines
-6. **"What we leave out"** — exclusion strip
-7. **Taste** — sensory section
-8. **The ritual** — "how to pop it" in 3 steps
-9. **Proof** — video wall + big number + review wall (+ named lab)
-10. **Dosage / safety honesty** — "how many can I have" (say the fear out loud)
-11. **Bundle / 24-hour stack** — AOV (Energy + Sleep)
-12. **FAQ** → footer
+1. **Hero** ✅ (§5) — gallery + typewriter + benefits + pack picker + Add to Cart + guarantee + rotating reviews
+2. **Feels — "Less coffee. More adrenaline."** ✅ (§5a) — replaced the rejected comparison table; Encha-style editorial card
+3. **Flow-state curve** ✅ (§5b) — replaced the rejected bar graph; Go Mints flow zone vs coffee/energy jitters→crash
+4. **Melt — "Feel it switch on"** ✅ (§5d) — pixel-art power-up flipbook (format mechanism)
+5. **Reviews** ✅ (§5e) — 5-card social-proof carousel with arrows + 4.8/5 summary
+6. **Leave-out — "What's not inside"** ✅ (§5e) — exclusion grid on a brand-gradient panel
+7. **Showcase** ✅ (§5e) — `sec.png` pack + 4 benefit icons on a brand band
+8. **Ingredients — "What's inside"** ✅ (§5c) — 4 active cards (caffeine / L-theanine / B6 / B12)
+9. **FAQ** ✅ (§5e) — tabbed accordion (Product / Usage / Shipping / General)
+10. **Footer CTA + Footer** ✅ (§5e) — "Still running on coffee?" + full footer
+
+**Not built / optional (from the original plan):** a Guarantee *ribbon* (a mini guarantee block already sits under Add-to-Cart in the hero), a dedicated Taste section (Encha flavour-profile layout is a candidate), a Ritual "3 steps" block, a Dosage/safety honesty block, and a Bundle/24-hr stack (Energy + Sleep). Add these only if the client asks — the page already reads as complete.
 
 ---
 
 ## 5. Hero section — AS BUILT ✅
-Working code is the `SECTION: HERO` block in **`gomintshero.html`**. This describes what's actually shipped (differs from the original cloud spec — several client changes across 2026-09-10):
+Working code is the `SECTION: HERO` block in **`index.html`**. This describes what's actually shipped (differs from the original cloud spec — several client changes across 2026-09-10):
 
 - **Layout:** 2-col grid — image **left**, content **right** on desktop; **stacks on mobile with the IMAGE FIRST (on top)**, then content.
 - **Background:** **plain white** (`var(--paper)`). No gradient, no glow blob.
 - **Font:** **Urbanist** (Google Fonts, weights 400–800). _(Was Montserrat, then switched to Urbanist for a more energetic feel.)_
 - **Product image:** uses **`hero img.png`** (the 3-pack "MORE ENERGY / SHARPER FOCUS" banner). Full-width, flat: `border-radius:0`, no float animation. 4-image gallery with thumbnail strip below.
 - **Content, in order:**
-  - Rating row: ★★★★★ 4.8 · 70+ verified reviews
-  - _(Eyebrow pill was **removed** per client.)_
-  - **Headline with a TYPEWRITER rotating word:** `Switch on your` + types **beast mode. → second wind. → crunch time. → laser focus. → all-nighter.** with a blinking cyan caret. Respects `prefers-reduced-motion`.
-  - **6 benefit points** with cyan→volt gradient icon circles (3D shadow), 2-col grid. Icons: battery, thumbs-up, clock, crosshair, pocket, shield.
-  - **Melo-style pack picker** (integrated into hero buy box):
-    - Flavor circles: Coffee + Peppermint (images: `coffee icon.png`, `peppermint.png`)
-    - 3 tier rows: 1 Pack ₹250, 2 Pack ₹450 (10% off), 4 Pack ₹499 (50% off, Most Popular — default active)
-    - Radio-button selection, per-unit pricing, discount + "Most Popular" badges
-  - **Add to Cart** button — cyan→volt gradient, updates price on tier selection
-  - **Rotating review card** directly below Add to Cart (`.hero .reviews`): 3 short "Verified Buyer" reviews auto-cycling every 5s (clickable dots, initials-avatar in brand gradient, 3D navy border + hard shadow). The bottom volt→cyan line is a **5s progress bar** (`.rv-bar`, `scaleX` fill) that restarts on each switch/dot-click. Fade via a `display:grid` stack so height never jumps. Reviews are placeholder copy → future schema blocks.
-  - _(Price line, "How it works" ghost button, and reassurance chips all **removed** per client.)_
+  - Rating row: ★★★★★ 4.8 · 70+ verified reviews  _(eyebrow pill removed per client)_
+  - **TYPEWRITER headline:** a rotating word (`Crunch time` / `Limitless energy` / `Rocket fuel`) on line 1 + a static cyan **`in a mint.`** on line 2, blinking cyan caret, respects `prefers-reduced-motion`.
+  - **Description line** below the headline (2 lines, MojoVibe voice): "Coffee's whole kick in a mint — melts in seconds, hits in four minutes flat. No jitters, no crash."
+  - **4 benefit tiles** (2-col), cyan-fill icon circles w/ navy border: 6 Hours of Clean Energy · Zero Jitters, Zero Crash · Hits In Under 4 Min · Pocket-Sized Boost.
+  - **Pack picker** (buy box):
+    - Flavour circles Coffee + Peppermint. **Selected = muted others + cyan ring/glow + scale + bold cyan label + a ✓ badge** (`.flav-opt.active::after`). Unselected are dimmed (`opacity:.55`).
+    - 3 tier rows: 1 Pack ₹250 · 2 Pack ₹450 (~~₹500~~ 10% off) · 4 Pack ₹499 (~~₹1,000~~ 50% off, Most Popular — default). Prices use `.tier-was` (struck MRP) + `.tier-now` (green pay-price). **Selected tier = solid cyan-tint fill + `inset 0 0 0 2.5px` cyan outline + filled ✓ radio.**
+  - **Add to Cart** — **flat solid cyan** (`background:var(--cyan)`, navy border, **NO gradient, NO shadow**), full-width, updates price on tier select.
+  - **Guarantee block** below Add to Cart (`.hero .guarantee`): a rotating circular **"MONEY-BACK · GUARANTEE · 14 DAYS"** seal (SVG, `@keyframes g-spin`) + "LOVE IT OR IT'S FREE" + the refund copy. _(The "Know more" link was removed.)_
+  - **Rotating review card** (`.hero .reviews`): 3 short "Verified Buyer" reviews auto-cycling every 5s (clickable dots, gradient initials-avatar). The bottom volt→cyan line is a **5s progress bar** (`.rv-bar`, `scaleX` fill) restarting on each switch/dot-click. Fade via a `display:grid` stack so height never jumps.
+  - _(Price line, "How it works" ghost button, reassurance chips all removed per client.)_
+  - ⚠️ Hero cards still carry the **old 3D shadow** — include in the no-shadow pass.
 - **Mobile (≤460px):** tier rows `flex-wrap:wrap` so prices drop to second line; benefit icons shrunk; `.copy` has `overflow:hidden` to prevent horizontal bleed.
 - **Global chrome above it** (announcement bar + premium header) is NOT part of this section — see **§8**.
 
 ### Typewriter (as implemented, inside the hero section's `<script>`)
 ```js
-var words=["beast mode.","second wind.","crunch time.","laser focus.","all-nighter."];
+var words=["Crunch time","Limitless energy","Rocket fuel"];   // line 1; line 2 is a static "in a mint."
 // type char-by-char, hold ~1.3s, backspace, next word, loop.
 // blinking caret via CSS @keyframes hero-blink. prefers-reduced-motion → show words[0] static.
 ```
 
 ---
 
-## 5a. Compare section — AS BUILT ✅
-Working code is the `SECTION: COMPARE` block in **`gomintshero.html`**.
+## 5a. Feels — "Less coffee. More adrenaline." — AS BUILT ✅
+`SECTION: FEELS` in **`index.html`**. **Replaced the rejected comparison table.** The client wanted quirky, relatable **high-adrenaline analogies** instead of a spec chart. Layout modeled on **Encha's** editorial product card. **No shadows.**
 
-- **Layout:** Single vertical **3D card** (thick navy border + hard offset `box-shadow:7px 9px 0 0 var(--navy)`, rounded corners 22px, white bg, max-width 720px centered).
-- **Inside the card, top to bottom:**
-  - **Headline:** "Quit the 3 PM crash / _without the trade-offs._" (cyan accent on second line)
-  - **Comparison table:** Go Mints vs Coffee vs Energy Drinks, 6 feature rows
-- **Go Mints column** has its own **3D highlight** — green gradient background (`#B8F0D0 → #DCF8A0`), thick navy `border-left`/`border-right`, rounded top/bottom on header/last row. Stands out from the table like a separate raised strip.
-- **Icons:** green circle ✓ for wins, navy circle ✕ for losses.
-- **Features compared:** Zero Jitters, Kicks In Under 4 Min, No Sugar Crash, Fits In Your Pocket, No Calories, Clean Energy + Focus. _(Coffee gets a ✓ on No Calories for honesty/credibility.)_
-- **Mobile (≤460px):** smaller padding/fonts/icons, card shadow reduced to `5px 7px`, fits within viewport.
+- **One flat card** (thin navy border, `border-radius:24px`, **no shadow**), image left / content right (stacks ≤820px).
+- **Left:** the pack (`sec.png`) on a soft `--sky` panel.
+- **Right:** headline "ENERGY + FOCUS, packed in a mint" + a rotating **"CLEAN ENERGY · NO CRASH"** SVG seal (top-right) + a short 2-line description, a hairline divider, then a compact 2-column area:
+  - **INTENSITY** — 4-of-5 lightning bolts filled.
+  - **ENERGY PROFILE** — small bar chart: Kick-in 95 · Focus 90 · Clean 85 · Smooth 88 · Lasting 92.
+  - **WHAT YOU'LL FEEL** — the analogies as a **2-col** icon list: Rollercoaster kick · Laser focus · Cold-plunge clarity · Parachute landing · Pocket-sized.
+- **De-dup with the flow curve (§5b):** this card = the *solo positive experience*; the curve owns the *crash/jitters-vs-competitors* story. So "crash" framing was pulled OUT of here (profile shows "Lasting" not "Crash").
+- Original icons + copy (asset-free SVG). All values are placeholder wireframe numbers.
 
 ---
 
-## 5b. Flow-state / before-after section — AS BUILT ✅
-`SECTION: FLOWSTATE` in **`gomintshero.html`**. Layout modeled on the Proper Wild before/after bar chart; **wording deliberately avoids "trial"/"clinical"**. Framed as an **instant** shift (Go Mints works in ~4 min) — "Before a mint" vs "Minutes later", NOT a multi-week transformation (that would contradict the instant-onset positioning).
+## 5b. Flow-state curve — AS BUILT ✅
+`SECTION: FLOWSTATE` in **`index.html`**. **Replaced the rejected before/after bar graph.** Client asked for a **Hack-Daily-style flow-state line curve** — original artwork, "much better than theirs." **Light, editorial, NO shadows** (an earlier dark "SaaS dashboard" version was rejected).
 
-- **Signature volt→cyan gradient band** (`background:var(--grad-brand)`, navy ink) — neon-yellow glow fading into cyan, matching the button/icon gradient; a deliberate colored break between the white hero/compare sections. Bars sit on the cyan lower half so white/green stay readable.
-- **2-col:** left = uppercase headline "Unlock your flow state" + a flow-state blurb + "See how it works" 3D CTA (white pill, navy border/shadow). Right = the chart. Stacks to 1-col ≤820px.
-- **Chart:** Y-axis label "Level of discomfort" (rotated) + `0.0–3.0` scale with 4 navy gridlines; 3 categories (**Crash / Jitters / Stress**), each a **pair** of bars — **Before a mint** = white, **Minutes later** = green `#7BDC3E`, both navy-outlined. Legend pills top-right. Discomfort drops after → after-bars shorter.
-- **Layout mechanics:** `.plot` is `position:relative` fixed-height; `.grid` (gridlines) and `.groups` (bars) are absolutely stacked with matching `inset-left` for the y-numbers; `.cats` sits under `.plot-col` with the same `padding-left` so labels align to bar groups.
-- **Scroll animation:** `IntersectionObserver` adds `.flowstate.in` at 30% in view → bars grow 0→`--h` (per-bar % of the 0–3 scale) with staggered `--d`. Fires once; `prefers-reduced-motion` disables it; no-IO fallback shows bars immediately.
-- ⚠️ **Placeholder data** — the before/after numbers are illustrative wireframe values; swap in real figures (or soften to a qualitative claim) before launch.
+- **Light band** (`background:#F4FAFD`, navy ink). **Compact** dark headline "Unlock your **flow state**" + small grey 2-line blurb + a legend (Go Mints solid cyan / Coffee & energy drinks dashed).
+- **Inline-SVG line chart** (`.fs-chart`, `max-width:600px`, tall portrait `viewBox="0 60 620 560"` so it renders big on mobile):
+  - Two thin cyan **flow-zone lines** (`.fc-thresh`, no filled band — the band read as "techy").
+  - **Go Mints** = thick cyan line (`.fc-gomints`, `stroke-width:9`) holding steady low in the flow zone → a ringed hero endpoint (`.fc-ring` + dot) tagged "GO MINTS".
+  - **Coffee & energy drinks** = dark dashed line (`.fc-others`) spiking up past **JITTERS** then diving below into **CRASH**, ending in a dark dot.
+  - Zone labels JITTERS / FLOW ZONE / CRASH + the GO MINTS tag are **all one size** (`.fc-zone` & `.fc-tag` = 32px) — cyan for the good stuff (flow zone, go mints), grey for the bad (jitters, crash). No time-axis labels (they collided).
+- **Scroll animation:** `IntersectionObserver` adds `.flowstate.in` → the Go Mints line **draws itself in** (`stroke-dasharray:1;pathLength=1;dashoffset 1→0`), the dashed line + dots fade in after. `prefers-reduced-motion` shows it instantly; no-IO fallback too.
+- **Curve = SVG `<path>` d-strings** — to reshape the spike/crash, edit the path coords (keep Go Mints inside y 280–440 band; labels live in the clear upper band above the line). Went through a 3-round design-QA polish; watch for label/line overlaps when editing.
 
 ---
 
 ## 5c. Ingredients ("What's inside") — AS BUILT ✅
-`SECTION: INGREDIENTS` in **`gomintshero.html`**. Layout modeled on Everyday Dose's "What's Inside" card row (chosen over Encha's single-item toggle — that's saved for the future Taste section §7).
+`SECTION: INGREDIENTS` in **`index.html`**. Layout modeled on Everyday Dose's "What's Inside" card row (chosen over Encha's single-item toggle — that's saved for the future Taste section §7).
 
 - **White section**, centered headline "What's inside" + sub "Four clean actives. Nothing to hide."
 - **4 cards** (Natural Caffeine / L-Theanine / Vitamin B6 / Vitamin B12), each = brand-gradient 3D icon circle + name + **dose pill** (exact mg + relatable multiple, e.g. "50 mg · ≈ ½ a coffee") + one-line **job** + italic **sensory line**. All-actives-visible (no tabs).
@@ -188,7 +200,7 @@ Working code is the `SECTION: COMPARE` block in **`gomintshero.html`**.
 ---
 
 ## 5d. "Feel it switch on" / power-up sprite — AS BUILT ✅
-`SECTION: MELT` in **`gomintshero.html`**. The "format mechanism" move (§3): an **AI-generated pixel-art character power-up** (idle → pops a mint → sparks → charging aura → full-power burst → charged), the client's Dragon-Ball-style idea done as an **original mascot** (no franchise likeness). Earlier tries (mouth-melt SVG, CSS aura) were scrapped.
+`SECTION: MELT` in **`index.html`**. The "format mechanism" move (§3): an **AI-generated pixel-art character power-up** (idle → pops a mint → sparks → charging aura → full-power burst → charged), the client's Dragon-Ball-style idea done as an **original mascot** (no franchise likeness). Earlier tries (mouth-melt SVG, CSS aura) were scrapped.
 
 - **Asset pipeline:** client generates a 6-frame sprite sheet with AI (transparent PNG) → `powerup-sprite.png`. Processed by **`tools/process_sprite.py`** (Pillow+numpy+scipy; run: `python tools/process_sprite.py` from the project folder): edge-flood removes any white bg, detects the 6 frames (adaptive column threshold, equal-split fallback), trims each to its **exact pixel bbox** and re-centers into a uniform grid (center-x, **bottom-aligned** baseline). Exports both a combined `powerup.webp` **and 6 individual frames `powerup-0.webp … powerup-5.webp`** (each 343×520, ~300 KB total). Re-run it whenever the source art changes.
 - **To replace ONE frame** (e.g. a redrawn pack frame as a full single image): trim + white-remove it and paste into the same 489×741→343×520 cell (bottom-aligned, center-x), save over `powerup-N.webp`. Then bump the cache-buster `?v=` in the flipbook JS. (This is how `2.png` replaced frame 1.)
@@ -200,20 +212,30 @@ Working code is the `SECTION: COMPARE` block in **`gomintshero.html`**.
 
 ---
 
+## 5e. Reviews · Leave-out · Showcase — AS BUILT ✅
+All in **`index.html`**. (Older sections — still use the 3D shadow style; flag for the no-shadow pass.)
+
+- **`SECTION: REVIEWS`** ("Hear it from them") — 4.8/5 summary with green star tiles + "based on 70+ reviews", then a horizontal **scroll-snap carousel** of 5 review cards (gradient initials avatar, star row, quote, name · Verified Buyer) with prev/next arrow buttons. Placeholder copy.
+- **`SECTION: LEAVEOUT`** ("What's *not* inside") — one card, left copy + a **brand-gradient panel** listing 8 struck-through exclusions (✕ Sugar, Aspartame, Taurine, Artificial Colors, Gluten, Fillers, Synthetic Caffeine, Preservatives).
+- **`SECTION: SHOWCASE`** — full-width brand-gradient band with `sec.png` pack + a 3×2 grid of 4 benefit icons (Natural Caffeine · L-Theanine · Zero Jitters · Pocket) joined by little squiggle connectors.
+
+## 5f. FAQ · Footer — AS BUILT ✅
+- **`SECTION: FAQ`** ("Got questions?") — **tabbed** accordion: 4 category tabs (Product / Usage / Shipping / General) filter `<details>` items via a small JS toggle; `+`/`−` markers. ~13 Q&As, placeholder copy.
+- **`SECTION: FOOTER CTA`** — brand-gradient band, "Still running on coffee?" + a navy "Grab Your Pack" button (anchors to `#hero`).
+- **`SECTION: FOOTER`** (`.site-footer`) — dark footer: logo + social icons, 3 link columns (Quick Links / Support / Information), copyright + "Designed by Harsh".
+
+---
+
 ## 6. Copy bank
 
 ### Live in the hero (as built)
-**Headline:** `Switch on your` + rotating: `beast mode.` `second wind.` `crunch time.` `laser focus.` `all-nighter.`
+**Headline (typewriter):** rotating `Crunch time` / `Limitless energy` / `Rocket fuel` + static cyan **`in a mint.`**
+**Description line:** "Coffee's whole kick in a mint — melts in seconds, hits in four minutes flat. No jitters, no crash."
 
 **Rating row:** ★★★★★ 4.8 · 70+ verified reviews
 
-**6 benefit tiles** (title-only, gradient 3D icon each):
-- **6 Hours of Clean Energy** (battery)
-- **Zero Jitters, Zero Crash** (thumbs-up)
-- **Hits In Under 4 Min** (clock)
-- **Sharpens Your Mind** (crosshair/focus)
-- **Pocket-Sized Boost** (pocket)
-- **100% Safe, Non-Addictive** (shield-check)
+**4 benefit tiles** (title-only, cyan icon circle each):
+- **6 Hours of Clean Energy** (battery) · **Zero Jitters, Zero Crash** (thumbs-up) · **Hits In Under 4 Min** (clock) · **Pocket-Sized Boost** (pocket)
 
 **Pack picker:** flavours Coffee / Peppermint · tiers **1 Pack ₹250** · **2 Pack ₹450** (~~₹500~~, 10% OFF, ₹225/ea) · **4 Pack ₹499** (~~₹1,000~~, 50% OFF, ₹125/ea — Most Popular, default). Button: `Add to Cart · ₹{selected total}`.
 
@@ -238,32 +260,18 @@ Go Mints is sold as a **daily/regular ritual**, not a one-off rescue. Every sect
 ---
 
 ## 7. Open items / TODO
-**Done (2026-09-10):**
-- [x] **Fonts** → Urbanist (switched from Montserrat for a more energetic feel).
-- [x] **Hero image** → using `hero img.png` (3-pack banner), full-width + flat. 4-image gallery with thumbnails.
-- [x] **Hero background** → plain white (gradient removed).
-- [x] **Eyebrow pill removed** from hero.
-- [x] **Premium DTC header built** (hamburger drawer + centered logo + account + cart) — see §8.
-- [x] **Announcement bar** forced to a single line (nowrap + responsive font).
-- [x] **File structured for Shopify** (section-scoped CSS zones + boundary markers) — see §8.
-- [x] **Benefit icons** → cyan→volt gradient fill, navy border, white SVG strokes, 3D shadow.
-- [x] **Add to Cart button** → cyan→volt gradient (was solid cyan).
-- [x] **"How it works" ghost button removed** from hero.
-- [x] **Melo-style pack picker** built and integrated into hero buy box (flavor circles + tier rows + dynamic pricing).
-- [x] **Reassurance chips removed** from below Add to Cart.
-- [x] **Mobile layout overflow fixed** — tier rows flex-wrap, `.copy` overflow:hidden.
-- [x] **Compare section built** (§5a) — 3D card with us-vs-them table, Go Mints vs Coffee vs Energy Drinks.
 
-**Still open:**
-- [ ] Rotating words updated to: beast mode / second wind / crunch time / laser focus / all-nighter — confirm or swap.
-- [ ] `hero img.png` is a full marketing banner with its own headline + stars baked in (duplicates some page messaging). Optional: replace with a transparent single-pack render later if the client prefers.
-- [ ] **Build sections 2, 6→12 in order** (§4) using the design system (§2) + conventions (§8). **Done:** 1 Hero, 3 Compare, 4 Flow-state, 4+ Melt/power-up, 5 Ingredients. **Next up:** 2 Guarantee ribbon, 6 "What we leave out", 7 Taste (use the Encha layout — see §5c), 8 Ritual, 9 Proof, 10 Dosage, 11 Bundle, 12 FAQ.
-- [ ] **Header nav** currently lists How it works / Ingredients / Compare / Reviews / Sleep — update the anchors once more sections have real `id`s to jump to.
-- [ ] After the full wireframe is done: **convert to Shopify Liquid sections** (§8).
+**The full PDP wireframe is built.** We're in a **client-revision loop** (see the feedback log in §0). Open items:
+
+- [ ] **⭐ Site-wide NO-SHADOW pass** — the client banned shadows. Only Feels (§5a) & Flow-state (§5b) + the flat Add-to-Cart comply. **Everything else still has `box-shadow`** (hero cards/benefits/reviews/guarantee, compare→gone, ingredients cards, reviews carousel cards, showcase icons, footer button). Strip all `box-shadow` (and hard 3D offsets) → replace with borders/hairlines. Grep the `<style>` for `box-shadow` and `0 0 var(--navy)` / `0 0 var(--cyan-deep)`.
+- [ ] **Header nav labels** still say How it works / Ingredients / Compare / Reviews / Sleep — "Compare" no longer exists; update to real section `id`s (`#feels`, `#flowstate`, `#ingredients`, `#reviews`, `#faq`).
+- [ ] **Placeholder content to replace before launch:** all review text, the Energy-profile & Intensity numbers (§5a), the flow-curve shape is illustrative, FAQ answers, `hero img.png` (a full marketing banner with baked-in headline/stars — consider a clean transparent pack), and `sec.png`.
+- [ ] **Optional new sections** if the client asks (§4 "not built"): dedicated Taste (Encha flavour-profile layout), Ritual "3 steps", Dosage/safety honesty, Bundle (Energy + Sleep).
+- [ ] **Then:** convert the whole file to **Shopify Liquid sections** (§8).
 
 ---
 
-_Note: earlier cloud-session artifact links (palette board / live hero) are stale — the real source is now `gomintshero.html` in this folder._
+_Note: this is the Energy + Focus PDP. There's a separate `gomints-sleep-pdp.html` / `gomints-energy-pdp.html` (older standalone mockups) — the live build is `index.html`._
 
 ---
 
@@ -272,7 +280,7 @@ _Note: earlier cloud-session artifact links (palette board / live hero) are stal
 The wireframe is built so it maps **1:1 to Shopify sections** with no rework. Follow these rules for every new section.
 
 ### File anatomy
-`gomintshero.html` has, in order:
+`index.html` has, in order:
 1. Top HTML comment documenting the convention.
 2. `<meta charset="utf-8">` + `<meta name="viewport" content="width=device-width, initial-scale=1">` — **both required**; without the viewport tag mobile media queries never fire.
 3. Google Fonts (Urbanist).
@@ -292,13 +300,14 @@ The wireframe is built so it maps **1:1 to Shopify sections** with no rework. Fo
 5. Any section-local JS goes in a `<script>` **inside** that `<section>`, commented as section JS.
 6. Content = hardcoded placeholder copy (from §6 or new). It becomes `{% schema %}` settings/blocks later; repeatable items (points, chips, review cards, ingredient cards) are future **blocks** — keep them as clean sibling lists.
 7. **Never put a literal `-->` inside an HTML doc-comment** — it closes the comment early and leaks text onto the page.
-8. Keep it fast + mobile-first (test at real phone widths).
+8. **NO shadows** (client rule) — structure with borders + hairline dividers, never `box-shadow`.
+9. Keep it fast + mobile-first (test at real phone widths).
 
 ### Global header (GLOBAL zone) — as built
 Premium DTC icon header, `<header class="site-header">` sticky, white translucent + blur:
 - 3-column grid (`1fr auto 1fr`) → **hamburger** left, **centered logo** (`Go Mints™`, cyan), **account + cart** icons right (cart has a cyan `.cart-count` badge).
 - Hamburger opens a **left slide-in drawer** (`#drawer`): scrim + panel with logo + close (×), nav links (How it works / Ingredients / Compare / Reviews / Sleep), and a footer (My account, Cart). Closes on ×, scrim click, or Escape; locks body scroll (`body.drawer-lock`). Toggle JS is right after the header markup.
-- **Announcement bar** (`.promo`): navy, single line — `white-space:nowrap` + `font-size:clamp(9.5px,2.8vw,13px)`. Copy: `FREE SHIPPING ₹499+ · COD AVAILABLE · SHIPS IN 24 HRS`.
+- **Announcement bar** (`.promo`): **volt-yellow bg, navy text**, single line — `white-space:nowrap` + `font-size:clamp(9.5px,2.8vw,13px)`. Copy: `FREE SHIPPING ₹499+ · COD AVAILABLE · SHIPS IN 24 HRS`.
 
 ### Previewing / testing (avoid a known trap)
 - Opening the file directly (double-click → `file://`) works for desktop viewing **but preview snapshots don't truly reflow**, and browser "**Fit to window**" device modes render desktop-width and just scale — so the mobile layout looks wrong even when it's correct.
@@ -307,7 +316,7 @@ Premium DTC icon header, `<header class="site-header">` sticky, white translucen
   cd "D:\CODE CONTAINERR\WEB DEV\GOMINT"
   python -m http.server 8777
   ```
-  then open `http://127.0.0.1:8777/gomintshero.html`, F12 → device toolbar → iPhone SE / 375px.
+  then open `http://127.0.0.1:8777/index.html`, F12 → device toolbar → iPhone SE / 375px.
 
 ### Shopify conversion (do this AFTER the full wireframe)
 - GLOBAL zone → theme base CSS (`:root` tokens + utilities) + `sections/header` (announcement bar, header, drawer).
