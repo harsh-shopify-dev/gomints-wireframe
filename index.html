@@ -43,8 +43,8 @@
   /* utility — buttons (design system) */
   .btn{border:0;cursor:pointer;font-family:inherit;font-weight:700;border-radius:100px;text-decoration:none;display:inline-block;
     transition:transform .12s,box-shadow .12s}
-  .btn.cyan{background:linear-gradient(160deg,var(--cyan) 0%,var(--volt) 100%);color:var(--navy);padding:16px 32px;font-size:1.02rem;box-shadow:0 6px 0 var(--cyan-deep)}
-  .btn.cyan:hover{transform:translateY(2px);box-shadow:0 4px 0 var(--cyan-deep)}
+  .btn.cyan{background:linear-gradient(160deg,var(--cyan) 0%,var(--volt) 100%);color:var(--navy);padding:16px 32px;font-size:1.02rem}
+  .btn.cyan:hover{filter:brightness(.96)}
   .btn.ghost{background:transparent;color:var(--navy);padding:16px 26px;font-size:1rem;box-shadow:inset 0 0 0 2px var(--navy)}
   .btn.ghost:hover{box-shadow:inset 0 0 0 2px var(--cyan-deep);color:var(--cyan-deep)}
 
@@ -68,7 +68,7 @@
   .nav-icon{position:relative;display:grid;place-items:center;width:42px;height:42px;border:0;background:transparent;color:var(--navy);cursor:pointer;text-decoration:none;border-radius:50%;transition:background .15s}
   .nav-icon:hover{background:rgba(8,42,69,.06)}
   .nav-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .cart-count{position:absolute;top:3px;right:3px;min-width:17px;height:17px;padding:0 4px;border-radius:100px;background:var(--cyan);color:var(--navy);font-size:10px;font-weight:800;line-height:17px;text-align:center;box-shadow:0 2px 0 var(--cyan-deep)}
+  .cart-count{position:absolute;top:3px;right:3px;min-width:17px;height:17px;padding:0 4px;border-radius:100px;background:var(--cyan);color:var(--navy);font-size:10px;font-weight:800;line-height:17px;text-align:center}
 
   /* slide-in menu drawer */
   .drawer{position:fixed;inset:0;z-index:60;visibility:hidden;pointer-events:none}
@@ -107,8 +107,8 @@
   .hero .gallery-main img{display:block;width:100%;height:auto;border-radius:0;opacity:0;position:absolute;top:0;left:0;transition:opacity .35s ease}
   .hero .gallery-main img.active{opacity:1;position:relative}
   .hero .thumbs{display:flex;gap:10px;padding-left:24px}
-  .hero .thumbs button{flex:0 0 auto;width:72px;height:72px;border:2px solid var(--navy);border-radius:10px;overflow:hidden;cursor:pointer;padding:0;background:var(--sky);transition:opacity .2s,border-color .2s,box-shadow .2s,transform .2s;opacity:.65;box-shadow:0 3px 8px rgba(8,42,69,.15)}
-  .hero .thumbs button.active{border-color:var(--cyan);box-shadow:0 3px 10px rgba(18,190,233,.35);opacity:1;transform:translateY(-2px)}
+  .hero .thumbs button{flex:0 0 auto;width:72px;height:72px;border:2px solid var(--navy);border-radius:10px;overflow:hidden;cursor:pointer;padding:0;background:var(--sky);transition:opacity .2s,border-color .2s,transform .2s;opacity:.65}
+  .hero .thumbs button.active{border-color:var(--cyan);opacity:1;transform:translateY(-2px)}
   .hero .thumbs button:hover{opacity:1}
   .hero .thumbs button img{width:100%;height:100%;object-fit:cover;display:block}
 
@@ -124,7 +124,7 @@
   .hero .sub{font-size:1.13rem;line-height:1.5;color:var(--navy-2);font-weight:500;max-width:46ch;margin-bottom:24px}
   .hero .benefits{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin-bottom:26px}
   .hero .benefits li{display:flex;gap:12px;align-items:flex-start}
-  .hero .benefits .ico{flex:none;width:46px;height:46px;border-radius:50%;background:var(--cyan);border:2.5px solid var(--navy);display:grid;place-items:center;margin-top:2px;box-shadow:0 3.5px 0 0 var(--navy),0 6px 10px rgba(8,42,69,.22)}
+  .hero .benefits .ico{flex:none;width:46px;height:46px;border-radius:50%;background:var(--cyan);border:2.5px solid var(--navy);display:grid;place-items:center;margin-top:2px}
   .hero .benefits .ico svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
   .hero .benefits .b-title{font-size:14px;font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:2px}
   .hero .benefits .b-desc{font-size:13px;font-weight:500;color:var(--grey);line-height:1.4}
@@ -146,7 +146,7 @@
     .hero .rate .stars{font-size:18px}
     .hero .benefits{grid-template-columns:1fr 1fr;gap:8px 10px;overflow:hidden}
     .hero .benefits li{gap:8px;min-width:0}
-    .hero .benefits .ico{width:28px;height:28px;border-width:2px;box-shadow:0 2px 0 0 var(--navy),0 3px 6px rgba(8,42,69,.15)}
+    .hero .benefits .ico{width:28px;height:28px;border-width:2px}
     .hero .benefits .ico svg{width:14px;height:14px}
     .hero .benefits li div{min-width:0;overflow:hidden}
     .hero .benefits .b-title{font-size:13px}
@@ -176,8 +176,8 @@
   .hero .flav-circle img{width:70%;height:70%;object-fit:contain;margin:15%}
   .hero .flav-label{font-size:12px;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:.02em}
   .hero .flav-opt.active .flav-label{color:var(--cyan-deep);font-weight:800}
-  .hero .flav-opt.active::after{content:'✓';position:absolute;top:-2px;left:50%;margin-left:14px;width:22px;height:22px;background:var(--cyan);color:#fff;border:2px solid #fff;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;box-shadow:0 2px 5px rgba(8,42,69,.3)}
-  .hero .tiers{display:flex;flex-direction:column;gap:0;margin-bottom:24px;border:1.5px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 14px rgba(8,42,69,.08)}
+  .hero .flav-opt.active::after{content:'✓';position:absolute;top:-2px;left:50%;margin-left:14px;width:22px;height:22px;background:var(--cyan);color:#fff;border:2px solid #fff;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800}
+  .hero .tiers{display:flex;flex-direction:column;gap:0;margin-bottom:24px;border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
   .hero .tier{display:flex;align-items:center;padding:18px 20px;cursor:pointer;transition:background .15s;background:#fff;border-bottom:1px solid var(--line)}
   .hero .tier:last-child{border-bottom:none}
   .hero .tier:hover{background:var(--mist)}
@@ -211,7 +211,7 @@
   @media(max-width:460px){.hero .g-seal{width:56px;height:56px}.hero .guarantee{gap:12px;padding:14px 14px}}
 
   /* hero — rotating reviews (directly below Add to Cart) */
-  .hero .reviews{position:relative;margin-top:16px;background:#fff;border:2px solid var(--navy);border-radius:16px;box-shadow:4px 5px 0 0 var(--navy);padding:16px 18px 18px;overflow:hidden}
+  .hero .reviews{position:relative;margin-top:16px;background:#fff;border:2px solid var(--navy);border-radius:16px;padding:16px 18px 18px;overflow:hidden}
   .hero .rv-bar{position:absolute;left:0;bottom:0;height:5px;width:100%;background:linear-gradient(90deg,var(--volt),var(--cyan));transform-origin:left;transform:scaleX(0)}
   .hero .rv-bar.go{animation:rv-fill 5s linear forwards}
   @keyframes rv-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -335,8 +335,8 @@
   .ingredients .ing-head{text-align:center;margin-bottom:8px;font-size:clamp(1.8rem,4vw,2.6rem);text-transform:uppercase;color:var(--navy);letter-spacing:-.01em}
   .ingredients .ing-sub{text-align:center;color:var(--grey);font-size:1.02rem;font-weight:600;margin-bottom:34px}
   .ingredients .ing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .ingredients .ing-card{background:#fff;border:2.5px solid var(--navy);border-radius:18px;box-shadow:5px 6px 0 0 var(--navy);padding:22px 18px;display:flex;flex-direction:column}
-  .ingredients .ing-ico{width:56px;height:56px;border-radius:50%;background:linear-gradient(160deg,var(--cyan) 0%,var(--volt) 100%);border:2.5px solid var(--navy);display:grid;place-items:center;margin-bottom:14px;box-shadow:0 4px 0 0 var(--navy)}
+  .ingredients .ing-card{background:#fff;border:2.5px solid var(--navy);border-radius:18px;padding:22px 18px;display:flex;flex-direction:column}
+  .ingredients .ing-ico{width:56px;height:56px;border-radius:50%;background:linear-gradient(160deg,var(--cyan) 0%,var(--volt) 100%);border:2.5px solid var(--navy);display:grid;place-items:center;margin-bottom:14px}
   .ingredients .ing-ico svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .ingredients .ing-name{font-size:17px;font-weight:800;color:var(--navy);margin-bottom:9px}
   .ingredients .ing-dose{align-self:flex-start;background:var(--sky);color:var(--cyan-deep);border:1.5px solid var(--cyan);font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:.02em;margin-bottom:12px}
@@ -353,7 +353,7 @@
   @media(max-width:560px){
     .ingredients .ing-sub{margin-bottom:24px}
     .ingredients .ing-grid{display:flex;overflow-x:auto;gap:12px;scroll-snap-type:x mandatory;margin:0 -18px;padding:4px 18px 14px;-webkit-overflow-scrolling:touch}
-    .ingredients .ing-card{flex:0 0 76%;scroll-snap-align:start;box-shadow:4px 5px 0 0 var(--navy)}
+    .ingredients .ing-card{flex:0 0 76%;scroll-snap-align:start}
   }
 
   /* ============================================================
@@ -362,14 +362,14 @@
      ============================================================ */
   .melt{background:var(--paper);padding:56px 0 64px}
   .melt .melt-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:44px;align-items:center}
-  .melt .melt-stage{position:relative;background:radial-gradient(circle at 50% 58%,#123a56 0%,#0a2438 55%,#061520 100%);border:3px solid var(--navy);border-radius:22px;box-shadow:7px 9px 0 0 var(--navy);padding:22px;display:grid;place-items:center;overflow:hidden}
+  .melt .melt-stage{position:relative;background:radial-gradient(circle at 50% 58%,#123a56 0%,#0a2438 55%,#061520 100%);border:3px solid var(--navy);border-radius:22px;padding:22px;display:grid;place-items:center;overflow:hidden}
   .melt .melt-stage svg{width:100%;max-width:320px;height:auto}
   .melt .melt-badge{position:absolute;top:14px;right:14px;background:linear-gradient(160deg,var(--cyan),var(--volt));color:var(--navy);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:6px 12px;border-radius:100px}
   .melt .m-title{font-size:clamp(1.9rem,4.4vw,3rem);text-transform:uppercase;color:var(--navy);line-height:1.05;margin-bottom:12px}
   .melt .m-sub{font-size:1.05rem;color:var(--grey);font-weight:600;margin-bottom:26px;max-width:44ch}
   .melt .m-list{list-style:none;display:flex;flex-direction:column;gap:18px}
   .melt .m-list li{display:flex;gap:14px;align-items:flex-start}
-  .melt .m-ico{flex:none;width:46px;height:46px;border-radius:50%;background:linear-gradient(160deg,var(--cyan),var(--volt));border:2.5px solid var(--navy);display:grid;place-items:center;box-shadow:0 3.5px 0 0 var(--navy)}
+  .melt .m-ico{flex:none;width:46px;height:46px;border-radius:50%;background:linear-gradient(160deg,var(--cyan),var(--volt));border:2.5px solid var(--navy);display:grid;place-items:center}
   .melt .m-ico svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
   .melt .m-h{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:3px}
   .melt .m-d{font-size:14px;font-weight:500;color:var(--navy-2);line-height:1.45}
@@ -384,7 +384,7 @@
   }
   @media(max-width:460px){
     .melt .m-title{font-size:1.6rem}
-    .melt .melt-stage{border-radius:16px;box-shadow:5px 7px 0 0 var(--navy)}
+    .melt .melt-stage{border-radius:16px}
   }
 
   /* ============================================================
@@ -501,8 +501,8 @@
   .footer-cta{background:linear-gradient(160deg,var(--cyan),var(--volt));padding:64px 0;text-align:center}
   .footer-cta .fc-head{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;text-transform:uppercase;color:var(--navy);line-height:1.05;margin-bottom:12px}
   .footer-cta .fc-sub{font-size:1rem;color:var(--navy);opacity:.7;font-weight:600;margin-bottom:28px}
-  .footer-cta .fc-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;background:var(--navy);color:#fff;font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:100px;text-decoration:none;box-shadow:0 4px 0 0 rgba(0,0,0,.2);transition:transform .2s,box-shadow .2s}
-  .footer-cta .fc-btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 0 rgba(0,0,0,.2)}
+  .footer-cta .fc-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;background:var(--navy);color:#fff;font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:100px;text-decoration:none;transition:transform .2s}
+  .footer-cta .fc-btn:hover{transform:translateY(-2px)}
   .footer-cta .fc-btn svg{width:20px;height:20px;fill:none;stroke:var(--volt);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 
   .site-footer{background:#111;color:#fff;padding:48px 0 0;background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:20px 20px}
@@ -1009,6 +1009,51 @@
 </section>
 <!-- /SECTION: MELT -->
 
+<!-- ========================= SECTION: INGREDIENTS ========================= -->
+<section class="ingredients" id="ingredients" data-section="ingredients">
+  <div class="wrap">
+    <h2 class="ing-head">What's inside</h2>
+    <p class="ing-sub">Four clean actives. Nothing to hide.</p>
+
+    <!-- block: ingredient card (repeatable → blocks) -->
+    <div class="ing-grid">
+      <div class="ing-card">
+        <span class="ing-ico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+        <div class="ing-name">Natural Caffeine</div>
+        <span class="ing-dose">50 mg · ≈ ½ a coffee</span>
+        <p class="ing-job">The clean lift — energy that shows up fast and doesn't spike.</p>
+        <p class="ing-feel">Pop one and you're switched on in about four minutes.</p>
+      </div>
+
+      <div class="ing-card">
+        <span class="ing-ico"><svg viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 4 13C4 7 12 2 20 2c0 8-5 16-9 18z"/><path d="M4 21c3.5-4 7.5-6.5 12-8.5"/></svg></span>
+        <div class="ing-name">L-Theanine</div>
+        <span class="ing-dose">75 mg · pairs 1:1</span>
+        <p class="ing-job">Smooths the caffeine out — sharp focus, none of the shakes.</p>
+        <p class="ing-feel">Calm but wired. The jitters just never turn up.</p>
+      </div>
+
+      <div class="ing-card">
+        <span class="ing-ico"><svg viewBox="0 0 24 24"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg></span>
+        <div class="ing-name">Vitamin B6</div>
+        <span class="ing-dose">Daily top-up</span>
+        <p class="ing-job">Keeps your brain firing and your mood on an even keel.</p>
+        <p class="ing-feel">Quietly doing the background work, every single day.</p>
+      </div>
+
+      <div class="ing-card">
+        <span class="ing-ico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2.5"/><path d="M22 10.5v3"/><path d="M6 12h6"/></svg></span>
+        <div class="ing-name">Vitamin B12</div>
+        <span class="ing-dose">Daily top-up</span>
+        <p class="ing-job">Fights the fog — steady, all-day energy from the inside.</p>
+        <p class="ing-feel">The reason it works better the more it becomes a habit.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- /SECTION: INGREDIENTS -->
+
 <!-- ========================= SECTION: REVIEWS ========================= -->
 <section class="reviews-sec" id="reviews" data-section="reviews">
   <div class="wrap">
@@ -1173,51 +1218,6 @@
   </script>
 </section>
 <!-- /SECTION: LEAVEOUT -->
-
-<!-- ========================= SECTION: INGREDIENTS ========================= -->
-<section class="ingredients" id="ingredients" data-section="ingredients">
-  <div class="wrap">
-    <h2 class="ing-head">What's inside</h2>
-    <p class="ing-sub">Four clean actives. Nothing to hide.</p>
-
-    <!-- block: ingredient card (repeatable → blocks) -->
-    <div class="ing-grid">
-      <div class="ing-card">
-        <span class="ing-ico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
-        <div class="ing-name">Natural Caffeine</div>
-        <span class="ing-dose">50 mg · ≈ ½ a coffee</span>
-        <p class="ing-job">The clean lift — energy that shows up fast and doesn't spike.</p>
-        <p class="ing-feel">Pop one and you're switched on in about four minutes.</p>
-      </div>
-
-      <div class="ing-card">
-        <span class="ing-ico"><svg viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 4 13C4 7 12 2 20 2c0 8-5 16-9 18z"/><path d="M4 21c3.5-4 7.5-6.5 12-8.5"/></svg></span>
-        <div class="ing-name">L-Theanine</div>
-        <span class="ing-dose">75 mg · pairs 1:1</span>
-        <p class="ing-job">Smooths the caffeine out — sharp focus, none of the shakes.</p>
-        <p class="ing-feel">Calm but wired. The jitters just never turn up.</p>
-      </div>
-
-      <div class="ing-card">
-        <span class="ing-ico"><svg viewBox="0 0 24 24"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg></span>
-        <div class="ing-name">Vitamin B6</div>
-        <span class="ing-dose">Daily top-up</span>
-        <p class="ing-job">Keeps your brain firing and your mood on an even keel.</p>
-        <p class="ing-feel">Quietly doing the background work, every single day.</p>
-      </div>
-
-      <div class="ing-card">
-        <span class="ing-ico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2.5"/><path d="M22 10.5v3"/><path d="M6 12h6"/></svg></span>
-        <div class="ing-name">Vitamin B12</div>
-        <span class="ing-dose">Daily top-up</span>
-        <p class="ing-job">Fights the fog — steady, all-day energy from the inside.</p>
-        <p class="ing-feel">The reason it works better the more it becomes a habit.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-<!-- /SECTION: INGREDIENTS -->
 
 <!-- ========================= SECTION: FAQ ========================= -->
 <section class="faq-sec" id="faq" data-section="faq">
