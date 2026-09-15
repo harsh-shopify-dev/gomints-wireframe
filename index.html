@@ -102,16 +102,24 @@
   .hero{background:var(--paper);position:relative;overflow:hidden;padding:26px 0 36px}
   .hero .hero-grid{display:grid;grid-template-columns:1fr 1.02fr;gap:44px;align-items:center;position:relative;z-index:2}
 
-  /* hero — product image gallery (edge-to-edge: no radius, bleeds top/left/right) */
+  /* hero — product image slider: swipe on mobile, arrows on desktop (edge-to-edge bleed) */
   .hero .stage{display:flex;flex-direction:column;gap:12px;margin-top:-26px;margin-left:-24px;width:calc(100% + 24px)}
-  .hero .gallery-main{position:relative;overflow:hidden;border-radius:0;background:transparent}
-  .hero .gallery-main img{display:block;width:100%;height:auto;border-radius:0;opacity:0;position:absolute;top:0;left:0;transition:opacity .35s ease}
-  .hero .gallery-main img.active{opacity:1;position:relative}
-  .hero .thumbs{display:flex;gap:10px;padding-left:24px}
+  .hero .gallery{position:relative;overflow:hidden;border-radius:0}
+  .hero .gallery-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .hero .gallery-track::-webkit-scrollbar{display:none}
+  .hero .gallery-track img{flex:0 0 100%;width:100%;height:auto;display:block;border-radius:0;scroll-snap-align:start}
+  .hero .gal-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:2px solid var(--navy);background:rgba(255,255,255,.92);cursor:pointer;display:grid;place-items:center;z-index:3;transition:background .15s}
+  .hero .gal-arrow:hover{background:#fff}
+  .hero .gal-arrow svg{width:20px;height:20px;stroke:var(--navy);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .hero .gal-prev{left:32px}
+  .hero .gal-next{right:8px}
+  .hero .thumbs{display:flex;gap:10px;padding-left:24px;overflow-x:auto;scrollbar-width:none}
+  .hero .thumbs::-webkit-scrollbar{display:none}
   .hero .thumbs button{flex:0 0 auto;width:72px;height:72px;border:2px solid var(--navy);border-radius:10px;overflow:hidden;cursor:pointer;padding:0;background:var(--sky);transition:opacity .2s,border-color .2s,transform .2s;opacity:.65}
   .hero .thumbs button.active{border-color:var(--cyan);opacity:1;transform:translateY(-2px)}
   .hero .thumbs button:hover{opacity:1}
   .hero .thumbs button img{width:100%;height:100%;object-fit:cover;display:block}
+  @media(max-width:920px){ .hero .gal-arrow{display:none} }
 
   /* hero — content */
   .hero .rate{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:16px;font-weight:600;color:var(--navy-2);margin-bottom:16px;width:100%}
@@ -602,17 +610,27 @@
   <div class="wrap">
     <div class="hero-grid">
 
-      <!-- product visual (block: image gallery) -->
+      <!-- product visual (block: image slider — swipe on mobile, arrows on desktop) -->
       <div class="stage">
-        <div class="gallery-main">
-          <img src="hero img.png" alt="Go Mints Energy + Focus — 3-pack bundle" class="active" data-index="0">
-          <img src="3.png" alt="8 Reasons People Are Making the Switch — Energy + Focus" data-index="1">
-          <img src="4.png" alt="Make It Your Ritual — Pop, Place, Focus" data-index="2">
+        <div class="gallery">
+          <button class="gal-arrow gal-prev" aria-label="Previous image"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="gal-arrow gal-next" aria-label="Next image"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
+          <div class="gallery-track">
+            <img src="hero img.png" alt="Go Mints Energy + Focus — 3-pack bundle">
+            <img src="3.png" alt="8 Reasons People Are Making the Switch — Energy + Focus">
+            <img src="4.png" alt="Make It Your Ritual — Pop, Place, Focus">
+            <img src="hero img.png" alt="Go Mints Energy + Focus — 3-pack bundle">
+            <img src="3.png" alt="8 Reasons People Are Making the Switch — Energy + Focus">
+            <img src="4.png" alt="Make It Your Ritual — Pop, Place, Focus">
+          </div>
         </div>
         <div class="thumbs">
           <button class="active" data-thumb="0" aria-label="View image 1"><img src="hero img.png" alt=""></button>
           <button data-thumb="1" aria-label="View image 2"><img src="3.png" alt=""></button>
           <button data-thumb="2" aria-label="View image 3"><img src="4.png" alt=""></button>
+          <button data-thumb="3" aria-label="View image 4"><img src="hero img.png" alt=""></button>
+          <button data-thumb="4" aria-label="View image 5"><img src="3.png" alt=""></button>
+          <button data-thumb="5" aria-label="View image 6"><img src="4.png" alt=""></button>
         </div>
       </div>
 
@@ -755,19 +773,53 @@
   <!-- SECTION JS: hero gallery (→ moves inside sections/hero.liquid) -->
   <script>
   (function(){
-    var main=document.querySelector('.hero .gallery-main');
+    var track=document.querySelector('.hero .gallery-track');
     var thumbs=document.querySelectorAll('.hero .thumbs button');
-    if(!main||!thumbs.length) return;
-    var imgs=main.querySelectorAll('img');
-    thumbs.forEach(function(btn){
-      btn.addEventListener('click',function(){
-        var i=parseInt(btn.getAttribute('data-thumb'),10);
-        imgs.forEach(function(img){img.classList.remove('active')});
-        thumbs.forEach(function(t){t.classList.remove('active')});
-        imgs[i].classList.add('active');
-        btn.classList.add('active');
-      });
+    var prev=document.querySelector('.hero .gal-prev');
+    var next=document.querySelector('.hero .gal-next');
+    if(!track) return;
+    var imgs=track.querySelectorAll('img');
+    var idx=0, anim, landTimer;
+    function mark(){ thumbs.forEach(function(t,x){t.classList.toggle('active',x===idx)}); }
+    function go(i){
+      idx=Math.max(0,Math.min(imgs.length-1,i));
+      mark();
+      // mandatory scroll-snap cancels native smooth scrollTo in some engines, so we
+      // animate scrollLeft directly (snap off during the tween, restored after).
+      var target=imgs[idx].offsetLeft-imgs[0].offsetLeft;
+      var start=track.scrollLeft, dist=target-start, dur=360, t0=null;
+      if(anim)cancelAnimationFrame(anim);
+      if(landTimer)clearTimeout(landTimer);
+      track.style.scrollSnapType='none';
+      function frame(ts){
+        if(t0===null)t0=ts;
+        var p=Math.min(1,(ts-t0)/dur);
+        var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;   // easeInOutQuad
+        track.scrollLeft=start+dist*e;
+        if(p<1){ anim=requestAnimationFrame(frame); }
+        else{ anim=null; track.style.scrollSnapType=''; }
+      }
+      anim=requestAnimationFrame(frame);
+      // safety net: if rAF is throttled/suspended, still land exactly on target
+      landTimer=setTimeout(function(){
+        if(anim){ cancelAnimationFrame(anim); anim=null; }
+        track.scrollLeft=target;
+        track.style.scrollSnapType='';
+      }, dur+240);
+    }
+    if(prev)prev.addEventListener('click',function(){go(idx-1)});
+    if(next)next.addEventListener('click',function(){go(idx+1)});
+    thumbs.forEach(function(btn,i){btn.addEventListener('click',function(){go(i)})});
+    var settle;
+    track.addEventListener('scroll',function(){
+      clearTimeout(settle);
+      settle=setTimeout(function(){
+        var w=imgs[0].getBoundingClientRect().width||1;
+        idx=Math.max(0,Math.min(imgs.length-1,Math.round(track.scrollLeft/w)));
+        mark();
+      },90);
     });
+    mark();
   })();
   </script>
 
