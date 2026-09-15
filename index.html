@@ -103,7 +103,7 @@
   .hero .hero-grid{display:grid;grid-template-columns:1fr 1.02fr;gap:44px;align-items:center;position:relative;z-index:2}
 
   /* hero — product image slider: swipe on mobile, arrows on desktop (edge-to-edge bleed) */
-  .hero .stage{display:flex;flex-direction:column;gap:12px;margin-top:-26px;margin-left:-24px;width:calc(100% + 24px)}
+  .hero .stage{display:flex;flex-direction:column;gap:12px;margin-top:-26px;margin-left:-24px;width:calc(100% + 24px);min-width:0}
   .hero .gallery{position:relative;overflow:hidden;border-radius:0}
   .hero .gallery-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .hero .gallery-track::-webkit-scrollbar{display:none}
@@ -122,6 +122,7 @@
   @media(max-width:920px){ .hero .gal-arrow{display:none} }
 
   /* hero — content */
+  .hero .copy{min-width:0}   /* let the grid column shrink to the viewport (avoid min-content overflow) */
   .hero .rate{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:16px;font-weight:600;color:var(--navy-2);margin-bottom:16px;width:100%}
   .hero .rate .stars{font-size:20px;letter-spacing:3px}
   .hero .rate .dot{color:var(--faint)}
